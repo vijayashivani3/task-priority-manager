@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "description": "Fix production bug",
+    "priority_label": "urgent",
+    "due_date": null,
+    "completed": true
+  },
+  {
+    "id": 2,
+    "description": "Write weekly report",
+    "priority_label": "low",
+    "due_date": null,
+    "completed": false
+  }
+]

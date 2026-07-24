@@ -81,3 +81,26 @@ class TaskManager:
 
     def list_completed(self) -> List[Task]:
         return [t for t in self._tasks_by_id.values() if t.completed]
+
+    def load(self, tasks: List[Task]) -> None:
+        """Rebuild this manager's internal heap and dict from a list of
+        previously-saved Task objects (see persistence.py). Only PENDING
+        tasks go into the heap -- a completed task doesn't need "next
+        task" ordering, so there's no need to recreate stale entries the
+        way lazy deletion handles them during a single run."""
+        self._heap = MinHeap()
+        self._tasks_by_id = {}
+        max_id_seen = 0
+
+        for task in tasks:
+            self._tasks_by_id[task.id] = task
+            max_id_seen = max(max_id_seen, task.id)
+            if not task.completed:
+                priority_value = priority_label_to_value(task.priority_label)
+                self._heap.push(priority_value, task)
+
+        self._next_id = max_id_seen + 1
+
+    def all_tasks(self) -> List[Task]:
+        """All tasks, pending and completed -- used when saving to disk."""
+        return list(self._tasks_by_id.values())
