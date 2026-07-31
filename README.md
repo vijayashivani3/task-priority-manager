@@ -123,7 +123,3 @@ with no memory of the last one. A JSON file on disk acts as the
 - Due-date-aware sorting alongside priority
 - Swap JSON for SQLite to support safe concurrent access
 
-## Author
-
-Built by Shivani as part of a software project portfolio for
-placement preparation (Zoho / Freshworks).
